@@ -1,5 +1,4 @@
 
-
 from collections.abc import Sequence
 
 from .project_types import PlayerId, Cell, Symbol, Feedback, Field
@@ -111,8 +110,6 @@ class GridGameModel:
 
     	return self.variant.place_symbol(symbol, cell)
 
-    	if self.variant == 'connectfour':
-
         if self.is_game_over:
             return Feedback.GAME_OVER
 
@@ -132,3 +129,41 @@ class GridGameModel:
 
     def _switch_to_next_player(self):
         self._current_player = self.next_player
+
+
+
+class WinCondition(ABC):
+    @abstractmethod
+    def check_winner(self, field: Field) -> PlayerId | None:
+        pass
+
+
+class WildTicTacToeModel
+
+
+    # for wild
+
+     def pick_symbol(self)-> Symbol:
+     	pass
+
+
+
+     # for notakto
+
+     def first_to_form(self):
+     	pass
+
+     if self.symbol != current_symbol:
+     	raise ValueError(f'You can only use the symbol: {current_symbol}')
+
+
+
+
+
+    # for Pick15
+
+
+
+
+
+
