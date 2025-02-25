@@ -54,6 +54,3 @@ class WildTicTacToeWinCondition(WinCondition):
                 if (basis := field.get_symbol_at(group[0])) is not None and field.are_all_equal_to_basis(basis, group):
                     return basis  
         return None
-
-
-    def check_current_player(self, sy)
