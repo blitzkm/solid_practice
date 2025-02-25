@@ -1,11 +1,8 @@
-
 import argparse
 
-from gridgame.model import GridGameModel
-from gridgame.view import View
-from gridgame.controller import Controller
-from variants import TicTacToeSymbolPlacer, WildSymbolPlacer, NotaktoSymbolPLacer, Pick15SymbolPlacer
-
+from model import GridGameModel, TicTacToeWinConditions, WildTicTacToeWinConditions, NotaktoWinConditions, Pick15WinConditions
+from view import View
+from controller import Controller
 
 def str_list(line: str) -> list[str]:
     return line.split(',')
@@ -32,7 +29,7 @@ def make_model(args: argparse.Namespace):
                 grid_size=args.size,
                 player_count=args.player_count,
                 player_symbols=args.symbols,
-                symbol_placer = TicTacToeSymbolPlacer(),
+                win_condition = TicTacToeWinConditions(),
             )
 
         case "wild":
@@ -40,7 +37,7 @@ def make_model(args: argparse.Namespace):
                 grid_size=args.size,
                 player_count=args.player_count,
                 player_symbols=args.symbols,
-                symbol_placer = WildSymbolPlacer(),
+                win_condition = WildTicTacToeWinConditions(),
             )
 
         case "notakto":
@@ -48,7 +45,7 @@ def make_model(args: argparse.Namespace):
                 grid_size=args.size,
                 player_count=args.player_count,
                 player_symbols=args.symbols,
-                symbol_placer = NotaktoSymbolPlacer(),
+                win_condition = NotaktoWinConditions(),
             )
 
         case "pick15":
@@ -56,7 +53,7 @@ def make_model(args: argparse.Namespace):
                 grid_size=args.size,
                 player_count=args.player_count,
                 player_symbols=args.symbols,
-                symbol_placer = Pick15SymbolPlacer(),
+                win_condition = Pick15WinConditions(),
             )
 
 def main():
