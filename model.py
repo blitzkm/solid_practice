@@ -1,5 +1,4 @@
 from collections.abc import Sequence
-
 from .project_types import PlayerId, Cell, Symbol, Feedback, Field
 
 

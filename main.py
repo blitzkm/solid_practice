@@ -1,13 +1,13 @@
 import argparse
 
-from model import GridGameModel, TicTacToeWinConditions, WildTicTacToeWinConditions, NotaktoWinConditions, Pick15WinConditions
+from model import GridGameModel
 from view import View
 from controller import Controller
 
 def str_list(line: str) -> list[str]:
     return line.split(',')
 
-def setup_parser():
+def setup_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-n', '--size', type=int, default=3)
@@ -21,15 +21,16 @@ def setup_parser():
 
     return parser
 
+def make_model(args: argparse.Namespace) -> GridGameModel:
+    variant: str = args.variant
 
-def make_model(args: argparse.Namespace):
-    match args.variant:
+    match variant:
         case "tictactoe":
             return GridGameModel(
                 grid_size=args.size,
                 player_count=args.player_count,
                 player_symbols=args.symbols,
-                win_condition = TicTacToeWinConditions(),
+                variant="tictactoe",
             )
 
         case "wild":
@@ -37,7 +38,7 @@ def make_model(args: argparse.Namespace):
                 grid_size=args.size,
                 player_count=args.player_count,
                 player_symbols=args.symbols,
-                win_condition = WildTicTacToeWinConditions(),
+                variant="wild",
             )
 
         case "notakto":
@@ -45,7 +46,7 @@ def make_model(args: argparse.Namespace):
                 grid_size=args.size,
                 player_count=args.player_count,
                 player_symbols=args.symbols,
-                win_condition = NotaktoWinConditions(),
+                variant="notakto",
             )
 
         case "pick15":
@@ -53,8 +54,12 @@ def make_model(args: argparse.Namespace):
                 grid_size=args.size,
                 player_count=args.player_count,
                 player_symbols=args.symbols,
-                win_condition = Pick15WinConditions(),
+                variant="pick15",
             )
+
+        case _:
+            raise ValueError(f"Unknown variant: {variant}")
+
 
 def main():
     parser = setup_parser()
